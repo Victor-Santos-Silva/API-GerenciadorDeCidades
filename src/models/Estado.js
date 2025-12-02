@@ -13,7 +13,7 @@ const Estado = sequelize.define(
       type: DataTypes.STRING(50),
       allowNull: false,
     },
-    estado_uf: {
+    uf: {
       type: DataTypes.STRING(2),
       allowNull: false,
       unique: true,

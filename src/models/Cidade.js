@@ -15,11 +15,11 @@ const Cidade = sequelize.define(
       allowNull: false,
     },
     estado_uf: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(2),
       allowNull: false,
       references: {
         model: Estado,
-        key: "idEstado",
+        key: "uf",
       },
     },
   },
