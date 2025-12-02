@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 const Estado = require("./Estado");
-const sequelize = require("../configs/database");
+const sequelize = require("../config/database");
 
 const Cidade = sequelize.define(
   "Cidade",
@@ -15,7 +15,7 @@ const Cidade = sequelize.define(
       allowNull: false,
     },
     estado_uf: {
-      type: DataTypes.STRING(2),
+      type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: Estado,
