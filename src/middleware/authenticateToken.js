@@ -10,10 +10,10 @@ function autenticateToken(req, res, next) {
   }
 
   // Verifica se o token é válido
-  const tokenFixo = process.env.API_TOKEN;
+  const meuTokenFixo = process.env.MEU_TOKEN_FIXO;
 
   // Verificação do token
-  if (tokenEnviado !== tokenFixo) {
+  if (tokenEnviado !== meuTokenFixo) {
     return res.status(403).json({
       msg: "Acesso negado. Token inválido.",
     });
