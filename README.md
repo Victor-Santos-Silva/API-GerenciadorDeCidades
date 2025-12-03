@@ -59,13 +59,13 @@ VALUES
 
 
 # Rotas
-Estado:
+- Estado:
 
   GET      /estados        Listagem
 
   GET      /estados/{id}   Retorna um estado
 
-Cidade:
+- Cidade:
 
   GET      /cidades        Listagem
 
@@ -77,7 +77,7 @@ Cidade:
   
   DELETE   /cidades/{id}   Remove uma cidade
 
-Exemplos de rotas:
+- Exemplos de rotas:
 
   GET      http://localhost:3000/api/cidades
   
