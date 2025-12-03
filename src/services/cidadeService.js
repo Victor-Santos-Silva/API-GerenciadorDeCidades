@@ -29,8 +29,8 @@ const cidadeService = {
         return null;
       }
       await cidade.update(cidadeToUpdate);
-      await Cidade.save();
-      return Cidade;
+      await cidade.save();
+      return cidade;
     } catch (error) {
       throw new Error("Ocorreu um erro ao atualizar Cidade");
     }
