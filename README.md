@@ -62,21 +62,31 @@ VALUES
 Estado:
 
   GET      /estados        Listagem
+
   GET      /estados/{id}   Retorna um estado
 
 Cidade:
 
   GET      /cidades        Listagem
+
   GET      /cidades/{id}   Retorna uma cidade
+
   POST     /cidades        Cria uma cidade
+  
   PUT      /cidades/{id}   Edita uma cidade
+  
   DELETE   /cidades/{id}   Remove uma cidade
 
 Exemplos de rotas:
+
   GET      http://localhost:3000/api/cidades
+  
   GET      http://localhost:3000/api/cidades/1
+  
   POST     http://localhost:3000/api/cidades
+  
   PUT      http://localhost:3000/api/cidades/1
+  
   DELETE   http://localhost:3000/api/cidades/1
 
 # Criando e Editando Cidades
