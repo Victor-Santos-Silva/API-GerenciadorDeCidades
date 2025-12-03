@@ -39,6 +39,7 @@ a sua maquina precisa estar instalado:
 
 Primeiro, crie um banco de dados no MySQL:
 - Em um arquivo MySQL, digite CREATE DATABASE "E o nome do database que voce escolher".
+
 Ex: CREATE DATABASE dbGerenciadorDeCidades;
 
 Depois de criar o database, vá para o terminal do projeto.
