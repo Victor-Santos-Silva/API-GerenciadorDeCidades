@@ -38,12 +38,18 @@ const cidadeController = {
   create: async (req, res) => {
     try {
       const cidade = await cidadeService.create(req.body);
+
+      if (!cidade) {
+        return res.status(400).json({
+          msg: "UF ou nome estão inválidos ou inexistentes!",
+        });
+      }
+
       return res.status(201).json({
         msg: "Cidade criada com sucesso!",
         cidade,
       });
     } catch (error) {
-      console.log("Erro no controller:", error);
       return res.status(500).json({
         msg: "Erro ao tentar criar a cidade",
       });

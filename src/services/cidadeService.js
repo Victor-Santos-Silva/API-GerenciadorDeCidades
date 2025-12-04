@@ -4,20 +4,28 @@ const Estado = require("../models/Estado");
 const cidadeService = {
   create: async (cidade) => {
     try {
+      // Extrai os dados do objeto cidade
       const { nome, estado_uf } = cidade;
 
+      // Verifica se o estado existe no banco de dados
       const estado = await Estado.findOne({
-        where: { uf: estado_uf.toUpperCase() },
+        where: { uf: estado_uf },
       });
 
-      if (!estado) {
-        throw new Error("Estado não encontrado com esse UF.");
+      // Verifica se o estado existe
+      if (!nome || !estado) {
+        return null;
       }
 
+      // Verifica se o nome da cidade excede o limite de caracteres
+      if (nome.length > 50) {
+        return null;
+      }
+
+      // Cria a nova cidade no banco de dados
       return await Cidade.create({ nome, estado_uf });
     } catch (error) {
-      console.log("Erro no service:", error);
-      throw new Error("Ocorreu um erro ao criar Cidade");
+      throw new Error("Ocorreu um erro ao criar cidade.");
     }
   },
 
