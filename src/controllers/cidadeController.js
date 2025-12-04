@@ -37,8 +37,21 @@ const cidadeController = {
 
   create: async (req, res) => {
     try {
-      const cidade = await cidadeService.create(req.body);
+      if (req.body.nome.length < 5) {
+        return res.status(400).json({
+          msg: "Nome minimo para uma cidade são 5 caracteres.",
+        });
+      } else if (req.body.nome.length > 50) {
+        return res.status(400).json({
+          msg: "Nome maximo para uma cidade são 50 caracteres.",
+        });
+      } else if (req.body.estado_uf.length !== 2) {
+        return res.status(400).json({
+          msg: "UF deve conter 2 caracteres.",
+        });
+      }
 
+      const cidade = await cidadeService.create(req.body);
       if (!cidade) {
         return res.status(400).json({
           msg: "UF ou nome da cidade estão inválidos!",
@@ -55,25 +68,39 @@ const cidadeController = {
       });
     }
   },
+
   update: async (req, res) => {
     try {
+      if (req.body.nome.length < 5) {
+        return res.status(400).json({
+          msg: "Nome minimo para uma cidade são 5 caracteres.",
+        });
+      }
+
+      if (req.body.estado_uf.length !== 2) {
+        return res.status(400).json({
+          msg: "UF deve conter 2 caracteres.",
+        });
+      }
+
       const cidade = await cidadeService.update(req.params.id, req.body);
       if (!cidade) {
         return res.status(400).json({
           msg: "Cidade nao encontrada!",
         });
       }
+
       return res.status(200).json({
         msg: "Cidade atualizada com sucesso!",
         cidade,
       });
     } catch (error) {
-      console.log("Erro para atualizar no controller:", error);
       return res.status(500).json({
         msg: "Erro ao atualizar a cidade!",
       });
     }
   },
+
   delete: async (req, res) => {
     try {
       const cidade = await cidadeService.delete(req.params.id);

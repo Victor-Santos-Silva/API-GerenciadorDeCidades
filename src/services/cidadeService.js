@@ -28,16 +28,16 @@ const cidadeService = {
     try {
       const cidade = await Cidade.findByPk(id);
       if (!cidade) {
-        // se cidade for vazio
         return null;
       }
+
       await cidade.update(cidadeToUpdate);
-      await cidade.save();
       return cidade;
     } catch (error) {
-      throw new Error("Ocorreu um erro ao atualizar Cidade");
+      throw new Error("Ocorreu um erro ao atualizar uma cidade.");
     }
   },
+
   getById: async (id) => {
     try {
       const cidade = await Cidade.findByPk(id);
