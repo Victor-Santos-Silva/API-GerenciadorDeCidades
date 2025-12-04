@@ -12,13 +12,8 @@ const cidadeService = {
         where: { uf: estado_uf },
       });
 
-      // Verifica se o estado existe
-      if (!nome || !estado) {
-        return null;
-      }
-
-      // Verifica se o nome da cidade excede o limite de caracteres
-      if (nome.length > 50) {
+      // Verifica se o estado existe e se o nome da cidade é válido
+      if (!estado || nome.length > 50) {
         return null;
       }
 

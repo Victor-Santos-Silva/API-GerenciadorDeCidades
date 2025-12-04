@@ -41,7 +41,7 @@ const cidadeController = {
 
       if (!cidade) {
         return res.status(400).json({
-          msg: "UF ou nome estão inválidos ou inexistentes!",
+          msg: "UF ou nome da cidade estão inválidos!",
         });
       }
 
