@@ -26,11 +26,15 @@ const cidadeService = {
 
   update: async (id, cidadeToUpdate) => {
     try {
+      // Busca a cidade pelo ID
       const cidade = await Cidade.findByPk(id);
+
+      // Se a cidade não existir, retorna null
       if (!cidade) {
         return null;
       }
 
+      // Atualiza a cidade com os novos dados
       await cidade.update(cidadeToUpdate);
       return cidade;
     } catch (error) {

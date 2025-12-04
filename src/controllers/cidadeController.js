@@ -37,6 +37,7 @@ const cidadeController = {
 
   create: async (req, res) => {
     try {
+      // Validações dos dados recebidos
       if (req.body.nome.length < 5) {
         return res.status(400).json({
           msg: "Nome minimo para uma cidade são 5 caracteres.",
@@ -51,6 +52,7 @@ const cidadeController = {
         });
       }
 
+      // Cria a cidade utilizando o serviço
       const cidade = await cidadeService.create(req.body);
       if (!cidade) {
         return res.status(400).json({
@@ -58,6 +60,7 @@ const cidadeController = {
         });
       }
 
+      // Sucesso na criação da cidade
       return res.status(201).json({
         msg: "Cidade criada com sucesso!",
         cidade,
@@ -71,6 +74,7 @@ const cidadeController = {
 
   update: async (req, res) => {
     try {
+      // Validações dos dados recebidos
       if (req.body.nome.length < 5) {
         return res.status(400).json({
           msg: "Nome minimo para uma cidade são 5 caracteres.",
@@ -83,6 +87,7 @@ const cidadeController = {
         });
       }
 
+      // Atualiza a cidade utilizando o serviço
       const cidade = await cidadeService.update(req.params.id, req.body);
       if (!cidade) {
         return res.status(400).json({
@@ -90,6 +95,7 @@ const cidadeController = {
         });
       }
 
+      // Sucesso na atualização da cidade
       return res.status(200).json({
         msg: "Cidade atualizada com sucesso!",
         cidade,
