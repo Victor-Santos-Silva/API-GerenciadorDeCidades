@@ -4,6 +4,7 @@ const Estado = require("../models/Estado");
 const cidadeService = {
   getAll: async () => {
     try {
+      // Busca todas as cidades no banco de dados
       return await Cidade.findAll();
     } catch (error) {
       throw new Error("Ocorreu um erro ao buscar todos os Cidades");
@@ -12,10 +13,15 @@ const cidadeService = {
 
   getById: async (id) => {
     try {
+      // Busca a cidade pelo ID
       const cidade = await Cidade.findByPk(id);
+
+      // Se a cidade não existir, retorna null
       if (!cidade) {
         return null;
       }
+
+      // Retorna a cidade encontrada
       return cidade;
     } catch (error) {
       throw new Error("Ocorreu um erro ao buscar um unico Cidade");

@@ -3,7 +3,10 @@ const cidadeService = require("../services/cidadeService.js");
 const cidadeController = {
   getAll: async (req, res) => {
     try {
+      // Busca todas as cidades utilizando o serviço
       const cidades = await cidadeService.getAll();
+
+      // Sucesso na busca de todas as cidades
       return res.status(200).json({
         msg: "Todas as cidades!",
         cidades,
@@ -18,14 +21,19 @@ const cidadeController = {
 
   getOne: async (req, res) => {
     try {
+      // Busca a cidade utilizando o serviço
       const cidade = await cidadeService.getById(req.params.id);
+
+      // Verifica se a cidade foi encontrada
       if (!cidade) {
         return res.status(400).json({
-          msg: "cidade nao encontrada!",
+          msg: "Cidade não encontrada!",
         });
       }
+
+      // Sucesso na busca da cidade
       return res.status(200).json({
-        msg: "cidade encontrada!",
+        msg: "Cidade encontrada!",
         cidade,
       });
     } catch (error) {
