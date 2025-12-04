@@ -109,17 +109,21 @@ const cidadeController = {
 
   delete: async (req, res) => {
     try {
+      // Deleta a cidade utilizando o serviço
       const cidade = await cidadeService.delete(req.params.id);
+
+      // Verifica se a cidade foi encontrada
       if (!cidade) {
         return res.status(400).json({
           msg: "Cidade nao encontrada!",
         });
       }
+
+      // Sucesso na deleção da cidade
       return res.status(200).json({
         msg: "Cidade deletada com sucesso!",
       });
     } catch (error) {
-      console.log("Erro para deletar no controller:", error);
       return res.status(500).json({
         msg: "Ocorreu um erro no servidor!",
       });

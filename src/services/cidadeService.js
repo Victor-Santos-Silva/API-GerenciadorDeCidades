@@ -2,6 +2,26 @@ const Cidade = require("../models/Cidade");
 const Estado = require("../models/Estado");
 
 const cidadeService = {
+  getAll: async () => {
+    try {
+      return await Cidade.findAll();
+    } catch (error) {
+      throw new Error("Ocorreu um erro ao buscar todos os Cidades");
+    }
+  },
+
+  getById: async (id) => {
+    try {
+      const cidade = await Cidade.findByPk(id);
+      if (!cidade) {
+        return null;
+      }
+      return cidade;
+    } catch (error) {
+      throw new Error("Ocorreu um erro ao buscar um unico Cidade");
+    }
+  },
+
   create: async (cidade) => {
     try {
       // Extrai os dados do objeto cidade
@@ -42,30 +62,16 @@ const cidadeService = {
     }
   },
 
-  getById: async (id) => {
-    try {
-      const cidade = await Cidade.findByPk(id);
-      if (!cidade) {
-        return null;
-      }
-      return cidade;
-    } catch (error) {
-      throw new Error("Ocorreu um erro ao buscar um unico Cidade");
-    }
-  },
-  getAll: async () => {
-    try {
-      return await Cidade.findAll();
-    } catch (error) {
-      throw new Error("Ocorreu um erro ao buscar todos os Cidades");
-    }
-  },
   delete: async (id) => {
     try {
+      // Busca a cidade pelo ID
       const cidade = await Cidade.findByPk(id);
+
+      // Se a cidade não existir, retorna null
       if (!cidade) {
         return null;
       }
+      // Deleta a cidade do banco de dados
       await cidade.destroy();
       return cidade;
     } catch (error) {
