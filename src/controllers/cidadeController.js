@@ -1,3 +1,5 @@
+const Cidade = require("../models/Cidade.js");
+const Estado = require("../models/Estado.js");
 const cidadeService = require("../services/cidadeService.js");
 
 const cidadeController = {
@@ -45,28 +47,34 @@ const cidadeController = {
 
   create: async (req, res) => {
     try {
+      const { nome, estado_uf } = req.body;
       // Validações dos dados recebidos
-      if (req.body.nome.length < 5) {
+      if (nome.length < 5) {
         return res.status(400).json({
           msg: "Nome minimo para uma cidade são 5 caracteres.",
         });
-      } else if (req.body.nome.length > 50) {
+      } else if (nome.length > 50) {
         return res.status(400).json({
           msg: "Nome maximo para uma cidade são 50 caracteres.",
         });
-      } else if (req.body.estado_uf.length !== 2) {
+      } else if (estado_uf.length !== 2) {
         return res.status(400).json({
           msg: "UF deve conter 2 caracteres.",
         });
       }
 
-      // Cria a cidade utilizando o serviço
-      const cidade = await cidadeService.create(req.body);
-      if (!cidade) {
+      const cidadeExiste = await Cidade.findOne({
+        where: { nome, estado_uf },
+      });
+
+      if (cidadeExiste) {
         return res.status(400).json({
-          msg: "UF ou nome da cidade estão inválidos!",
+          msg: "Cidade já cadastrada nesse estado.",
         });
       }
+
+      // Cria a cidade utilizando o serviço
+      const cidade = await cidadeService.create(req.body);
 
       // Sucesso na criação da cidade
       return res.status(201).json({
@@ -74,6 +82,7 @@ const cidadeController = {
         cidade,
       });
     } catch (error) {
+      console.log("Erro no controller:", error);
       return res.status(500).json({
         msg: "Erro ao tentar criar a cidade",
       });
