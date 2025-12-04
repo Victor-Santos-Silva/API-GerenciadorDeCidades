@@ -36,6 +36,8 @@ VALUES
 
 SELECT * FROM cidades;
 
+SELECT * FROM estados;
+
 -- DROP TABLE cidades;
 
 -- DROP DATABASE dbGerenciadorCidades;
